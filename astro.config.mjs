@@ -1,5 +1,15 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
 
-// https://astro.build/config
-export default defineConfig({});
+import react from '@astrojs/react';
+
+export default defineConfig({
+  server: {
+    port: 4000,
+  },
+  integrations: [tailwind(), react()],
+  devToolbar: {
+    enabled: false,
+  },
+});
