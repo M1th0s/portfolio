@@ -55,6 +55,18 @@ li{
     padding-inline: 1rem;
 }
 
+.btn{
+    
+    background-color: var(--primary-color-400);
+    color: var(--secondary-color-100);
+    padding: .85rem 1.5rem;
+    border-radius: 5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1rem;
+
+}
+
 /* Header section*/
 .header{
     position: fixed;
