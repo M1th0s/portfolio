@@ -67,6 +67,10 @@ li{
 
 }
 
+.pt-section{
+    padding-top: 5rem;
+}
+
 /* Header section*/
 .header{
     position: fixed;
