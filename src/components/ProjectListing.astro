@@ -1,0 +1,58 @@
+---
+import Image from 'astro/components/Image.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+    project: CollectionEntry<'projects'>;
+}
+
+const { project }: Props = Astro.props;
+
+const { title, mainImage, client, work } = project.data;
+---
+
+<article class="project">
+    <a class="image" href={`/projects/${project.id}`} aria-label= {title}>
+        <Image width={500} height={500} src={mainImage} alt={title}/>
+        </a>
+
+    <a class="title" href={`/projects/${project.id}`} aria-label= {title}>
+        <h3>{title}</h3>
+        </a>
+
+    <div class="details">
+        <div class="flex">
+            <p>Client:</p>
+            <span>{client}</span>
+        </div>
+
+        <div class="flex">
+            <p>{work}</p>
+            <span>{work}</span>
+        </div>
+    </div>
+    </article>   
+
+    <style>
+        .project:not(:last-child) {
+            margin-bottom: 3rem;
+        }
+
+        .image {
+            width: 100%;
+        }
+
+        img {
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+        
+        .title {
+            position: relative;
+            color: var(--secondary-color-100);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            transition: color 0.3s ease-in-out;
+        }
+    </style>
