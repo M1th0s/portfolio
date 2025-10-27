@@ -27,32 +27,81 @@ const { title, mainImage, client, work } = project.data;
         </div>
 
         <div class="flex">
-            <p>{work}</p>
+            <p>work:</p>
             <span>{work}</span>
         </div>
     </div>
     </article>   
 
-    <style>
-        .project:not(:last-child) {
-            margin-bottom: 3rem;
-        }
+  <style>
+  /* ==== Project Card ==== */
+  .project:not(:last-child) {
+    margin-bottom: 3rem;
+  }
 
-        .image {
-            width: 100%;
-        }
+  /* ==== Imagen ==== */
+  .image {
+    width: 100%;
+  }
 
-        img {
-            margin-bottom: 1.5rem;
-            border-radius: 0.5rem;
-            width: 100%;
-        }
-        
-        .title {
-            position: relative;
-            color: var(--secondary-color-100);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            transition: color 0.3s ease-in-out;
-        }
-    </style>
+  .project img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  /* ==== Título ==== */
+  .title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    
+  }
+
+  .title h3 {
+    color: var(--secondary-color-100);
+    font-size: 1.25rem;
+    transition: color 0.3s ease-in-out;
+    
+  }
+
+  .title::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 100px;
+    height: 4px;
+    border-radius: .5rem;
+    background-color: var(--primary-color-400);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .title:hover h3 {
+    color: var(--primary-color-400);
+  }
+
+  .title:hover::after {
+    transform: translateY(-4px);
+  }
+
+  /* ==== Detalles ==== */
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .flex:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .details p {
+    color: var(--secondary-color-200);
+    font-size: 0.8rem;
+  }
+
+  
+</style>
