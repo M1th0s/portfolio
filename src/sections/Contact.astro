@@ -1,0 +1,106 @@
+<footer id="contact" class="pt-section">
+    <div class="container">
+        <div class="content">
+            <div class="titlle">
+                <h3>Get touch with me</h3>
+                <a class="mail" href="mailto:cristianyanez2020@gmail.com" target="_blank"
+                    >cyanez@mail</a
+                >
+            </div>
+
+            <div class="address-info">
+                <img src="/logo.svg" alt="logo">
+
+                <div>
+                    <a class="phone" href="tel: 99999999"></a>
+
+                    <div class="social-links">
+                        <a href= " https://www.linkedin.com/in/cyanezgallardo/" target="_blank" aria-label="Linkedin">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+
+                         <a href="mailto:cristianyanez2020@gmail.com" aria-label="Mail">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">{new Date().getFullYear()}. Hecha con teclado y café por Cyanez ☕</p>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: var(--secondary-color-900);
+        text-align: center;
+    }
+
+    .title {
+        margin-bottom: 3rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mail {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--primary-color-400);
+    }
+
+    img {
+        margin-inline: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .address-info {
+        border-radius: 1px solid var(--secondary-color-400);
+        padding-bottom: 2rem;
+    }
+
+    .phone {
+        color: var(--secondary-color-100);
+        transition: color 0.3s ease-in;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .phone:hover {
+        color: var(--primary-color-400);
+    }
+
+    .social-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        font-size: 1.5rem;
+        color: var(--secondary-color-100);
+        transition: color 0.3s ease-in;
+    }
+
+    .social-links a:hover {
+        color: var(--primary-color-400);
+        transform: translateY(-0.3rem);
+    }
+
+    .copyright {
+        padding: 1rem;
+    }
+
+    @media (min-with: 768px) {
+        .address-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        } 
+    }
+
+  
+</style>
