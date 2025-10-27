@@ -15,6 +15,7 @@ const projectCollection = defineCollection({
             storyContent: z.string(),
             dayOneTitle: z.string(),
             dayOneContent: z.string(),
+            link: z.string().url().optional(),
         });
     },
 });
