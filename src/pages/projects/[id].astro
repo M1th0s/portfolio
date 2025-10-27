@@ -1,0 +1,131 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+
+    return projects.map((project) => ({
+        params: { id: project.id },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+
+const { title, mainImage, otherImages, client, work, storyTitle, storyContent, dayOneTitle, dayOneContent, link } = project.data;
+const { id } = Astro.params;
+
+console.log('project', project)
+---
+
+<Layout {title}>
+
+<section class="pt-section">
+    <div class="container">
+        <div class="title">
+            <h2>{title}</h2>
+            <a href="/#work" aria-label="Go back to work">Go back</a>
+        </div>
+
+        <Image 
+            src={mainImage} 
+            width={1200} 
+            height={900} 
+            class="min-image" 
+            alt={title}
+            
+        />
+
+        <div class="story">
+           <h3>{storyTitle}</h3>
+            <p>{storyContent}</p>
+            <a href={link} target="_blank" rel="noopener noreferrer" class="btn-link">
+  🔗 Ver proyecto
+</a>
+         </div>
+
+        
+
+        
+    </div>
+</section>
+</Layout>
+
+<style>
+    h2 {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+    
+    a{
+        color: var(--secondary-color-100);
+        transition: color 0.3s ease-in-out;
+    }
+
+    a:hover{
+        color: var(--primary-color-400);
+    }
+
+    img{
+        border-radius: 1rem;
+        width: 100%;
+    }
+    
+    .title{
+        padding-top: 3rem;
+        padding-bottom: 2rem;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid var(--secondary-color-400);
+    }
+
+    .min-image{
+        margin-inline: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .story {
+        max-width: 700px;
+        margin-inline: auto;
+        margin-bottom: 2rem;
+    }
+
+    .story h3 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+    }
+
+    .other-images {
+        margin-bottom: 2rem;
+    }
+    .other-images img:not (:last-child) {
+        margin-bottom: 1rem;
+    }
+
+    .btn-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color-400);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-link:hover {
+  background-color: var(--secondary-color-100);
+}
+
+    @media (min-width: 768px) {
+        .other-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+</style>
