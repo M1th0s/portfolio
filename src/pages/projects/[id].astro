@@ -2,7 +2,6 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -15,117 +14,165 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 
-const { title, mainImage, otherImages, client, work, storyTitle, storyContent, dayOneTitle, dayOneContent, link } = project.data;
-const { id } = Astro.params;
-
-console.log('project', project)
+const { title, mainImage, client, work, storyTitle, storyContent, link } = project.data;
 ---
 
 <Layout {title}>
 
-<section class="pt-section">
+<section class="pt-section project-section">
     <div class="container">
-        <div class="title">
-            <h2>{title}</h2>
-            <a href="/#work" aria-label="Go back to work">Go back</a>
+        <a href="/#work" class="back-link" aria-label="Go back to work">&larr; Go back</a>
+
+        <div class="project-layout">
+            <div class="project-image">
+                <img src={mainImage.src} alt={title} />
+            </div>
+
+            <div class="project-content">
+                <h2>{title}</h2>
+
+                <div class="meta">
+                    {client && <span class="tag">{client}</span>}
+                    {work && <span class="tag">{work}</span>}
+                </div>
+
+                <div class="description">
+                    <h3>{storyTitle}</h3>
+                    <p>{storyContent}</p>
+                </div>
+
+                {link && (
+                    <a href={link} target="_blank" rel="noopener noreferrer" class="btn-link">
+                        View project &rarr;
+                    </a>
+                )}
+            </div>
         </div>
-
-        <Image 
-            src={mainImage} 
-            width={1200} 
-            height={900} 
-            class="min-image" 
-            alt={title}
-            
-        />
-
-        <div class="story">
-           <h3>{storyTitle}</h3>
-            <p>{storyContent}</p>
-            <a href={link} target="_blank" rel="noopener noreferrer" class="btn-link">
-  🔗 Ver proyecto
-</a>
-         </div>
-
-        
-
-        
     </div>
 </section>
 </Layout>
 
 <style>
-    h2 {
-        text-align: left;
-        margin-bottom: 1rem;
-    }
-    
-    a{
-        color: var(--secondary-color-100);
-        transition: color 0.3s ease-in-out;
+    .project-section {
+        background-color: var(--secondary-color-900);
+        min-height: 100vh;
+        padding-top: 8rem;
     }
 
-    a:hover{
+    .back-link {
+        display: inline-block;
+        color: var(--secondary-color-200);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        transition: color 0.3s ease;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
         color: var(--primary-color-400);
     }
 
-    img{
-        border-radius: 1rem;
-        width: 100%;
-    }
-    
-    .title{
-        padding-top: 3rem;
-        padding-bottom: 2rem;
-        margin-bottom: 3rem;
-        border-bottom: 1px solid var(--secondary-color-400);
+    .project-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
-    .min-image{
-        margin-inline: auto;
+    .project-image {
+        border-radius: 0.75rem;
+        overflow: hidden;
+        aspect-ratio: 3 / 2;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .project-content h2 {
+        text-align: left;
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
         margin-bottom: 1.5rem;
     }
 
-    .story {
-        max-width: 700px;
-        margin-inline: auto;
-        margin-bottom: 2rem;
+    .tag {
+        display: inline-block;
+        font-size: 0.8rem;
+        padding: 0.3rem 0.9rem;
+        border-radius: 2rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--secondary-color-200);
     }
 
-    .story h3 {
-        margin-top: 1rem;
+    .description h3 {
+        font-size: 1.3rem;
         margin-bottom: 1rem;
-        font-size: 1.6rem;
+        color: var(--secondary-color-100);
     }
 
-    .other-images {
-        margin-bottom: 2rem;
-    }
-    .other-images img:not (:last-child) {
-        margin-bottom: 1rem;
+    .description p {
+        color: var(--secondary-color-200);
+        line-height: 1.7;
+        font-size: 0.95rem;
     }
 
     .btn-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0.5rem;
-  background-color: var(--primary-color-400);
-  color: white;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
-}
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 1.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        background-color: var(--primary-color-400);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-.btn-link:hover {
-  background-color: var(--secondary-color-100);
-}
+    .btn-link:hover {
+        background-color: #cc0000;
+        transform: translateY(-2px);
+    }
 
     @media (min-width: 768px) {
-        .other-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+        .project-layout {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 3rem;
+        }
+
+        .project-image {
+            flex: 0 0 42%;
+            aspect-ratio: 3 / 2;
+            position: sticky;
+            top: 8rem;
+        }
+
+        .project-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-content h2 {
+            font-size: 2.2rem;
+            margin-top: 0;
+        }
+
+        .description p {
+            font-size: 1rem;
         }
     }
 </style>

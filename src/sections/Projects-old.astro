@@ -9,42 +9,22 @@ const projects = await getCollection('projects');
 <section id="work" class="pt-section">
 <div class="container">
     <h2>My projects</h2>
-    <p class="section-subtitle">Some things I've built</p>
 
     <div class="grid">
         {projects.map((project) => (
             <ProjectListing project={project} />
-        ))}
+            ))}
     </div>
 
 </div>
 </section>
 
 <style>
-    .section-subtitle {
-        text-align: center;
-        color: var(--secondary-color-200);
-        margin-top: -1.5rem;
-        margin-bottom: 3rem;
-        font-size: 0.95rem;
-    }
-
-    .grid {
-        display: grid;
-        gap: 2rem;
-    }
-
-    @media (min-width: 600px) {
+    @media (min-width: 768px) {
         .grid {
+            display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
         }
     }
 </style>
